@@ -20,3 +20,54 @@ data.forEach(function(ufo_sightings) {
         cell.text(value);
         });
 });
+
+
+
+//Filter through the Data Based on the Date
+
+//Assign data.js Data to Variable
+var dt = data;
+
+//Assign Action to Button Click and Form Submit
+var button = d3.select('button');
+button.on('click', runEnter);
+
+var form = d3.select('form');
+form.on('submit', runEnter);
+
+//Create Function to Allow Button Click and Form Submit
+//Some of the Code Obtained from JavaScript Day 3 Activity 9
+function runEnter() {
+    //Drop the Old Table Values
+    tbody.selectAll('tr').remove();
+
+    //Prevent Refresh on Button Click and Form Submit
+    d3.event.preventDefault();
+
+    //Assign the User Input to a Variable
+    var dt_value = d3.select('#datetime').property('value');
+
+    //Print the Input Value to the Console
+    console.log(dt_value);
+
+    //Apply the Filter
+    var dt_filter = dt.filter(dt1 => dt1.datetime === dt_value);
+
+    //Print the Filtered Values to the Console
+    console.log(dt_filter);
+
+    //Replace the Values in the Table with the Filtered Values
+    //Append the New Values
+    dt_filter.forEach(function(ufo_sightings) {
+        //Append Rows
+        var row1 = tbody.append('tr');
+        //Pull the Key-Value Pairs from Each Field in Each Row in the dt_filter
+        Object.entries(ufo_sightings).forEach(function([key, value]) {
+            console.log(key, value);
+            //Append Cells for Each Field in Each Row
+            var cell1 = row1.append('td');
+            //Pull in Values to the Cells
+            cell1.text(value);
+        })
+    })
+}
