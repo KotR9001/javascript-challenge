@@ -62,7 +62,7 @@ function runEnter() {
     //Apply the Filters
 
     // Apply the Datetime Filter
-    if (date_value === undefined) {
+    if (date_value === "") {
         var date_filter = dt;
     }
     else {
