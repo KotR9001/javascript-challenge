@@ -23,7 +23,7 @@ data.forEach(function(ufo_sightings) {
 
 
 
-//Filter through the Data Based on the Date
+//Filter through the Data Based on the Date, City, State, Country, & UFO Shape
 
 //Assign data.js Data to Variable
 var dt = data;
@@ -44,21 +44,72 @@ function runEnter() {
     //Prevent Refresh on Button Click and Form Submit
     d3.event.preventDefault();
 
-    //Assign the User Input to a Variable
-    var dt_value = d3.select('#datetime').property('value');
+    //Assign the User Inputs to their Respective Variables
+    var date_value = d3.select('#datetime').property('value');
+    var city_value = d3.select('#city').property('value');
+    var state_value = d3.select('#state').property('value');
+    var country_value = d3.select('#country').property('value');
+    var shape_value = d3.select('#shape').property('value');
 
-    //Print the Input Value to the Console
-    console.log(dt_value);
 
-    //Apply the Filter
-    var dt_filter = dt.filter(dt1 => dt1.datetime === dt_value);
+    //Print the Input Values to the Console
+    console.log(date_value);
+    console.log(city_value);
+    console.log(state_value);
+    console.log(country_value);
+    console.log(shape_value);
+
+    //Apply the Filters
+
+    // Apply the Datetime Filter
+    if (date_value === undefined) {
+        var date_filter = dt;
+    }
+    else {
+        var date_filter = dt.filter(dt1=>dt1.datetime === date_value);
+    }
+    
+    // Apply the City Filter
+    if (city_value === "") {
+        var city_filter = date_filter;
+    }
+    else {
+        var city_filter = date_filter.filter(dt2=>dt2.city === city_value);
+    }
+
+    // Apply the State Filter
+    if (state_value === "") {
+        var state_filter = city_filter;
+    }
+    else {
+        var state_filter = city_filter.filter(dt3=>dt3.state === state_value);
+    }
+
+    // Apply the Country Filter
+    if (country_value === "") {
+        var country_filter = state_filter;
+    }
+    else {
+        var country_filter = state_filter.filter(dt4=>dt4.country === country_value);
+    }
+
+    // Apply the UFO Shape Filter
+    if (shape_value === "") {
+        var shape_filter = country_filter;
+    }
+    else {
+        var shape_filter = country_filter.filter(dt5=>dt5.shape === shape_value);
+    }
 
     //Print the Filtered Values to the Console
-    console.log(dt_filter);
+    console.log(`The data is: ${date_filter}`);
+    console.log(shape_filter);
+
+
 
     //Replace the Values in the Table with the Filtered Values
     //Append the New Values
-    dt_filter.forEach(function(ufo_sightings) {
+    shape_filter.forEach(function(ufo_sightings) {
         //Append Rows
         var row1 = tbody.append('tr');
         //Pull the Key-Value Pairs from Each Field in Each Row in the dt_filter
