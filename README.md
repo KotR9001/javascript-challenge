@@ -3,6 +3,7 @@ UFO Sightings
 
 
 Created a site that allows users to filter UFO sightings.<br />
+<br />
 For the first part, made a filter for rows based on values from the 'date/time' column.<br />
 ![image](https://github.com/KotR9001/javascript-challenge/assets/57807780/7ed7ed86-092b-493f-af64-8dc1476a5530)<br />
 <br />
